@@ -97,6 +97,75 @@
             Total: $0
           </p>
 
+          <form id="form-cliente" class="mt-6">
+
+            <div class="mb-4">
+              <label for="nombre" class="block font-semibold mb-1">
+                Nombre
+              </label>
+
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                class="w-full border rounded p-2"
+              >
+
+              <p
+                id="error-nombre"
+                class="text-sm text-red-600 hidden">
+              </p>
+            </div>
+
+            <div class="mb-4">
+              <label for="telefono" class="block font-semibold mb-1">
+                Teléfono
+              </label>
+
+              <input
+                id="telefono"
+                name="telefono"
+                type="text"
+                class="w-full border rounded p-2"
+              >
+
+              <p
+                id="error-telefono"
+                class="text-sm text-red-600 hidden">
+              </p>
+            </div>
+
+            <div class="mb-4">
+              <label for="correo" class="block font-semibold mb-1">
+                Correo
+              </label>
+
+              <input
+                id="correo"
+                name="correo"
+                type="text"
+                class="w-full border rounded p-2"
+              >
+
+              <p
+                id="error-correo"
+                class="text-sm text-red-600 hidden">
+              </p>
+            </div>
+
+            <p
+              id="error-pedido"
+              class="text-sm text-red-600 hidden mb-4">
+            </p>
+
+            <button
+              type="submit"
+              class="w-full bg-blue-600 text-white font-semibold p-2 rounded hover:bg-blue-800">
+              Confirmar pedido
+            </button>
+
+          </form>
+
           <button
             id="btn-vaciar"
             class="w-full bg-red-600 text-white font-semibold p-2 rounded mt-4 hover:bg-red-800">
@@ -106,6 +175,19 @@
         </aside>
 
       </div>
+
+      <section class="mt-8">
+
+        <h2 class="text-2xl font-bold mb-4">
+          Pedidos registrados
+        </h2>
+
+        <div
+          id="pedidos-registrados"
+          class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        </div>
+
+      </section>
 
     </main>
 

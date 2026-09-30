@@ -165,10 +165,14 @@ const errorPedido =
 
 
 // ------------------------------------------------------------
-// EJERCICIO 6 — Pedidos registrados con estado
+// EJERCICIO 6 Y 7 — Pedidos registrados
 // ------------------------------------------------------------
 
-const pedidosRegistrados = []
+const pedidosRegistrados =
+  JSON.parse(
+    localStorage.getItem('pedidosRegistrados')
+  ) || []
+
 
 const ESTADOS = [
   'Pendiente',
@@ -176,7 +180,9 @@ const ESTADOS = [
   'Entregado'
 ]
 
+
 const COLORES = {
+
   'Pendiente':
     'bg-yellow-100 border-yellow-400',
 
@@ -187,9 +193,29 @@ const COLORES = {
     'bg-green-100 border-green-400'
 }
 
-const pedidosRegistradosContenedor =
-  document.getElementById('pedidos-registrados')
 
+const pedidosRegistradosContenedor =
+  document.getElementById(
+    'pedidos-registrados'
+  )
+
+
+// ------------------------------------------------------------
+// EJERCICIO 7 — Guardar en localStorage
+// ------------------------------------------------------------
+
+function guardarPedidos() {
+
+  localStorage.setItem(
+    'pedidosRegistrados',
+    JSON.stringify(pedidosRegistrados)
+  )
+}
+
+
+// ------------------------------------------------------------
+// Mostrar pedidos registrados
+// ------------------------------------------------------------
 
 function mostrarPedidosRegistrados() {
 
@@ -331,6 +357,7 @@ formularioCliente.addEventListener(
         0
       )
 
+
       pedidosRegistrados.push({
 
         id: Date.now(),
@@ -347,6 +374,10 @@ formularioCliente.addEventListener(
 
         estado: 'Pendiente'
       })
+
+
+      guardarPedidos()
+
 
       pedido.length = 0
 
@@ -369,34 +400,51 @@ pedidosRegistradosContenedor.addEventListener(
   (evento) => {
 
     const boton =
-      evento.target.closest('button[data-avanzar]')
+      evento.target.closest(
+        'button[data-avanzar]'
+      )
 
     if (!boton) return
 
+
     const id =
       Number(boton.dataset.avanzar)
+
 
     const pedidoRegistrado =
       pedidosRegistrados.find(
         p => p.id === id
       )
 
+
     if (!pedidoRegistrado) return
+
 
     const posicionActual =
       ESTADOS.indexOf(
         pedidoRegistrado.estado
       )
 
+
     const siguienteEstado =
       ESTADOS[posicionActual + 1]
+
 
     if (siguienteEstado) {
 
       pedidoRegistrado.estado =
         siguienteEstado
 
+      guardarPedidos()
+
       mostrarPedidosRegistrados()
     }
   }
 )
+
+
+// ------------------------------------------------------------
+// Cargar pedidos guardados al iniciar
+// ------------------------------------------------------------
+
+mostrarPedidosRegistrados()
